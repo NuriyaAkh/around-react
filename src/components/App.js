@@ -1,43 +1,16 @@
-import logo from './images/logo.svg';
-//import './App.css';
-import './index.css';
+import Header from './Header';
+import Main from './Main';
+import Footer from'./Footer';
+import '../index.css';
 
 function App() {
   return (
     
     <body className="page">
 
-    <header className="header">
-      <img className="header__logo" src={logo} alt="logo Around US" />
-    </header>
-    <main className="content">
-      <section className="profile">
-        <div className ="profile__img-container">
-        <img className="profile__img" src="<%=require('./images/image_jc.jpg')%>" alt="profile image" />
-        <div className ="profile__img-edit-logo">
-          <img className ="profile__img-icon" src="<%=require('./images/edit-avatar-logo.svg')%>" alt="edit avatar icon" />
-        </div>
-        </div>
-        <div className="profile__info">
-          <div className="profile__text">
-            <h1 className="profile__name">Jacques Cousteau</h1>
-            <button aria-label="edit" type="button" className="profile__button-name-edit">
-            </button>
-            <p className="profile__about">Explorer</p>
-          </div>
-  
-          <button aria-label="add" type="button" className="profile__button-add">
-            <img className="profile__add-img" src="<%=require('./images/+.svg')%>" alt="add sidn" />
-          </button>
-        </div>
-      </section>
-      <section className="cards">
-        <ul className="cards__container"></ul>
-      </section>
-    </main>
-    <footer className="footer">
-      <p className="footer__text">© 2022 Around The U.S.</p>
-    </footer>
+    <Header/>
+    <Main/>
+    <Footer/>
   {/* <!-- Preview image popup --> */}
     <div className="forms" id="image-show">
       <div className="forms__image-big">
