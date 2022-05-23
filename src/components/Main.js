@@ -55,6 +55,7 @@ return (
     <span className="about-input-error form__error-text "></span>
     </>
     }
+    isOpen = {handleEditProfileClick}
     />
      <PopupWithForm 
     title="New place"
@@ -70,6 +71,7 @@ return (
           <span className="image-link-input-error form__error-text"></span>
     </>
     }
+    isOpen={handleAddPlaceClick}
     />
      <PopupWithForm 
     title="Change profile picture"
@@ -81,12 +83,14 @@ return (
           <span className="avatar-link-input-error form__error-text"></span>
     </>
     }
+    isOpen={handleEditAvatarClick}
     />
      <PopupWithForm 
     title="Are you sure?"
     name ="confirm-form" 
     formId = "confirm-popup"
     buttonText='Yes'
+    //isOpen={}
     />
     </>
 );
