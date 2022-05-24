@@ -5,7 +5,7 @@ import PopupWithForm from './PopupWithForm';
 export default function Main( {
   onEditProfileClick, 
   onAddPlaceClick,
-  onEditAvatarClick} ){
+  onEditAvatarClick, onDeleteCardClick,onCardClick} ){
  
 return (
   <>

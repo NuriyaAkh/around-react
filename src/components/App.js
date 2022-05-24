@@ -3,15 +3,17 @@ import Header from './Header';
 import Main from './Main';
 import Footer from'./Footer';
 import PopupWithForm from './PopupWithForm';
-import ImagePopup from './ImagePopup'
+import ImagePopup from './ImagePopup';
 import '../index.css';
+import {api} from '../utils/api';
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen]= React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen]= React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen]= React.useState(false);
   const [isConfirmationPopupOpen, setConfirmationPopupOpen] = React.useState(false);
-  const [isShowImagePopupOpen, setShowImagePopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState(undefined);
+
   function handleAddPlaceClick() {
     setAddPlacePopupOpen(true);
     }
@@ -21,8 +23,8 @@ function App() {
     function handleEditProfileClick(){
       setEditProfilePopupOpen(true); 
     }
-    function handleImageClick(){
-      setShowImagePopupOpen(true);
+    function handleImageClick(card){
+      setSelectedCard(card);
     }
     function handleDeleteClick(){
       setConfirmationPopupOpen(true);
@@ -31,8 +33,7 @@ function App() {
       setAddPlacePopupOpen(false);
       setEditAvatarPopupOpen(false);
       setEditProfilePopupOpen(false);
-      setShowImagePopupOpen(false);
-
+      setSelectedCard(undefined);
     }
   return (
     
@@ -43,7 +44,8 @@ function App() {
      onEditProfileClick = {handleEditProfileClick}
      onAddPlaceClick = {handleAddPlaceClick}
      onEditAvatarClick = {handleEditAvatarClick}
-     //onCardClick = {}
+     onDeleteCardClick = {handleDeleteClick}
+     onCardClick = {handleImageClick}
      />
     <Footer/>
 
@@ -84,7 +86,6 @@ function App() {
      <PopupWithForm 
     title="Change profile picture"
     name ="avatar-form"
-    formId = "update-avatar-popup"
     children={
       <>
        <input type="URL" className="form__input" id="avatar-link" name="avatar" placeholder="New Image URL" required />
@@ -97,23 +98,22 @@ function App() {
      <PopupWithForm 
     title="Are you sure?"
     name ="confirm-form" 
-    formId = "confirm-popup"
     buttonText='Yes'
     onClose ={closeAllPopups}
     isOpen={isConfirmationPopupOpen}
     />
     < ImagePopup 
-    isOpen ={isShowImagePopupOpen}
+    card = {selectedCard}
     onClose ={closeAllPopups} />
 
-  {/* <!-- Preview image popup --> */}
+  {/* <!-- Preview image popup --> 
     <div className="forms" id="image-show">
       <div className="forms__image-big">
         <button aria-label="close" type="button" className="forms__button-close"></button>
         <img className="forms__image" alt=" " src=" "/>
         <h3 className="forms__image-title"></h3>
       </div>
-    </div>
+    </div>*/}
   {/* <!-- Profile info popup --> 
     <div className="forms" id="edit-profile">
       <div className="forms__container">
