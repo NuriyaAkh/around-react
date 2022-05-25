@@ -18,14 +18,18 @@ export default function Main( {
     React.useEffect(()=>{
 api.getUserData()
 .then((data)=>{
-  console.log(data);
+  //console.log(data);
   setUserName(data.name);
   setUserDescription(data.about);
   setUserAvatar(data.avatar);
-}
-
-)
-    })
+});
+api.getInitialCards()
+.then((data)=>{
+console.log(data);
+setCards([...cards]);
+})
+.catch((err) => console.error(`Error while executing: ${err}`));
+    },[]);
 return (
   <>
 <main className="content">
