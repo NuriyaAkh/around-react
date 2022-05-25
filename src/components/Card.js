@@ -1,7 +1,7 @@
 export default function Card ({card, onCardClick}){
 console.log(card);
   function handleImageClick(){
-    console.log("run");
+    //console.log("run");
     onCardClick(card)
   }
 

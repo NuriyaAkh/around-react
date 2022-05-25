@@ -62,7 +62,7 @@ return (
         <ul className="cards__container">
           {cards.map((card)=>{
             //console.log(card);
-            return <Card key ={card._id} card={card} onClick={onCardClick}/>
+            return <Card key ={card._id} card={card} onCardClick={onCardClick}/>
             
 
           })}

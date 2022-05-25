@@ -4,7 +4,7 @@
  }){
    return(
  <>
- <div className={`forms${card ? 'forms_is-open' : ''}`}>
+ <div className={`forms ${card ? 'forms_is-open' : ''}`}>
   <div className="forms__image-big">
    <button aria-label="close" type="button" className="forms__button-close" onClick={onClose}></button>
    <img className="forms__image" alt={card ? card.name : ''} src={card ? card.link : ''}/>
