@@ -9,7 +9,8 @@ import Card from './Card';
 export default function Main( {
   onEditProfileClick, 
   onAddPlaceClick,
-  onEditAvatarClick} )
+  onEditAvatarClick,
+  onCardClick} )
   {
     const [userName, setUserName]= React.useState("");
     const [userDescription, setUserDescription] = React.useState("");
@@ -26,8 +27,8 @@ api.getUserData()
 });
 api.getInitialCards()
 .then((data)=>{
-console.log(data);
-setCards([...cards]);
+//console.log(data);
+setCards(data);
 })
 .catch((err) => console.error(`Error while executing: ${err}`));
     },[]);
@@ -60,8 +61,8 @@ return (
       <section className="cards">
         <ul className="cards__container">
           {cards.map((card)=>{
-            
-            <Card key ={card._id} card= {card}/>
+            //console.log(card);
+            return <Card key ={card._id} card={card} onClick={onCardClick}/>
             
 
           })}

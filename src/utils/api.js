@@ -1,4 +1,4 @@
-import React from 'react';
+
 class Api  {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;

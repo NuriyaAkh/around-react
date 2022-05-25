@@ -33,7 +33,7 @@ function App() {
       setAddPlacePopupOpen(false);
       setEditAvatarPopupOpen(false);
       setEditProfilePopupOpen(false);
-      setSelectedCard(undefined);
+      setSelectedCard({isOpen: false});
     }
   return (
     
@@ -118,19 +118,6 @@ function App() {
     onClose ={closeAllPopups} />
 
   
-    <template id="card">
-      <li className="card">
-        <img className="card__img" src=" " alt=""/>
-        <button aria-label="delete button" className="card__delete" type="button"></button>
-        <div className="card__info">
-          <h2 className="card__title"></h2>
-          <div className="card__like">
-          <button aria-label="love it" type="button" className="card__button"></button>
-          <p className ="card__likes-counter"></p>
-          </div>
-        </div>
-      </li>
-    </template>
    
   
   </div>
