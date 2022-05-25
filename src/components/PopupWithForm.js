@@ -5,7 +5,6 @@ export default function PopupWithForm ({
   isOpen,
   buttonText = "Save",
   onClose,
-  formId,
   children
 })
 {
@@ -14,7 +13,7 @@ export default function PopupWithForm ({
     <div className="forms__container">
       <button aria-label="close" type="button" className="forms__button-close" onClick={onClose}></button>
       <h3 className="forms__title">{title}</h3>
-      <form className="form" name={name} novalidate>
+      <form className="form" name={name} noValidate>
         {children}
         <button type="submit" className="form__button">{buttonText}</button>
       </form>

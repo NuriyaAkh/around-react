@@ -13,10 +13,12 @@ export default function Main( {
     const [userName, setUserName]= React.useState("");
     const [userDescription, setUserDescription] = React.useState("");
     const [userAvatar, setUserAvatar] = React.useState("");
+    const [cards, setCards] = React.useState([]);
 
     React.useEffect(()=>{
-api.getAllData()
+api.getUserData()
 .then((data)=>{
+  console.log(data);
   setUserName(data.name);
   setUserDescription(data.about);
   setUserAvatar(data.avatar);
@@ -30,6 +32,7 @@ return (
       <section className="profile">
         <div className ="profile__img-container">
         <img className="profile__img" src={userAvatar} alt="profile image" />
+        {/* To substitute the avatar URL in the container, use the following code: style={{ backgroundImage: `url(${userAvatar})` }} */}
         <div className ="profile__img-edit-logo">
           <img className ="profile__img-icon" src={EditIcon} alt="edit avatar icon"
           onClick={onEditAvatarClick } />

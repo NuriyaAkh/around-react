@@ -37,7 +37,7 @@ function App() {
     }
   return (
     
-    <body className="page">
+    <div className="page">
 
     <Header/>
     <Main
@@ -55,11 +55,22 @@ function App() {
     formId = "edit-profile"
     children={
       <>
-      <input type="text" className="form__input" id="username" name="username" placeholder="Name" required minlength="2"
-      maxlength="40" />
+      <input type="text" 
+      className="form__input" 
+      id="username" 
+      name="username" 
+      placeholder="Name" 
+      required 
+      minLength="2"
+      maxLength="40" />
     <span className="username-input-error form__error-text"></span>
-    <input type="text" className="form__input" id="about" name="about" placeholder="About Me" required minlength="2"
-      maxlength="200" />
+    <input type="text" 
+    className="form__input" 
+    id="about" name="about" 
+    placeholder="About Me" 
+    required 
+    minLength="2"
+    maxLength="200" />
     <span className="about-input-error form__error-text "></span>
     </>
     }
@@ -73,7 +84,7 @@ function App() {
     buttonText='Create'
     children={
       <>
-       <input type="text" className="form__input " id="title" name="name" placeholder="Title" minlength="1" maxlength="30"
+       <input type="text" className="form__input " id="title" name="name" placeholder="Title" minLength="1" maxLength="30"
             required />
           <span className="title-input-error form__error-text "></span>
           <input type="URL" className="form__input" id="image-link" name="link" placeholder="Image link" required />
@@ -106,67 +117,7 @@ function App() {
     card = {selectedCard}
     onClose ={closeAllPopups} />
 
-  {/* <!-- Preview image popup --> 
-    <div className="forms" id="image-show">
-      <div className="forms__image-big">
-        <button aria-label="close" type="button" className="forms__button-close"></button>
-        <img className="forms__image" alt=" " src=" "/>
-        <h3 className="forms__image-title"></h3>
-      </div>
-    </div>*/}
-  {/* <!-- Profile info popup --> 
-    <div className="forms" id="edit-profile">
-      <div className="forms__container">
-        <button aria-label="close" type="button" className="forms__button-close"></button>
-        <h3 className="forms__title">Edit profile</h3>
-        <form className="form" name="edit-form" id="edit-form" novalidate>
-          <input type="text" className="form__input" id="username" name="username" placeholder="Name" required minlength="2"
-            maxlength="40" />
-          <span className="username-input-error form__error-text"></span>
-          <input type="text" className="form__input" id="about" name="about" placeholder="About Me" required minlength="2"
-            maxlength="200" />
-          <span className="about-input-error form__error-text "></span>
-          <button type="submit" className="form__button">Save</button>
-        </form>
-      </div>
-    </div>
-    {/* <!-- Add new card popup--> 
-    <div className="forms" id="img-add">
-      <div className="forms__container">
-        <button aria-label="close" type="button" className="forms__button-close"></button>
-        <h3 className="forms__title">New place</h3>
-        <form className="form" name="add-form" id="add-form" novalidate>
-          <input type="text" className="form__input " id="title" name="name" placeholder="Title" minlength="1" maxlength="30"
-            required />
-          <span className="title-input-error form__error-text "></span>
-          <input type="URL" className="form__input" id="image-link" name="link" placeholder="Image link" required />
-          <span className="image-link-input-error form__error-text"></span>
-          <button type="submit" className="form__button" disabled>Create</button>
-        </form>
-      </div>
-    </div>
-    {/* <!--Confirm popup  --> 
-    <div className="forms" id="confirm-popup">
-      <div className="forms__container">
-        <button aria-label="close" type="button" className="forms__button-close"></button>
-        <form className="form" name="confirm-form" id="confirm-form" novalidate>
-        <h3 className="forms__title">Are you sure?</h3>
-        <button type="submit" className="form__button">Yes</button>
-        </form>
-      </div>
-    </div>
-    {/* <!-- Change profile picture popup --> 
-    <div className="forms" id="update-avatar-popup">
-      <div className="forms__container">
-        <button aria-label="close" type="button" className="forms__button-close"></button>
-        <form className="form" name="avatar-form" id="avatar-form" novalidate>
-        <h3 className="forms__title">Change profile picture</h3>
-        <input type="URL" className="form__input" id="avatar-link" name="avatar" placeholder="New Image URL" required />
-          <span className="avatar-link-input-error form__error-text"></span>
-        <button type="submit" className="form__button">Save</button>
-      </form>
-      </div>
-    </div>*/}
+  
     <template id="card">
       <li className="card">
         <img className="card__img" src=" " alt=""/>
@@ -182,7 +133,7 @@ function App() {
     </template>
    
   
-  </body>
+  </div>
     
   );
 }
