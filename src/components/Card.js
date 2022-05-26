@@ -3,7 +3,7 @@ export default function Card({card, onCardClick,onDeleteCardClick}) {
     onCardClick(card);
   }
   function handleDeleteClick() {
-   
+   //console.log("run");
     onDeleteCardClick();
   }
   return (
