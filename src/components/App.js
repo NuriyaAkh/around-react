@@ -11,7 +11,7 @@ function App() {
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [isConfirmationPopupOpen, setConfirmationPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState(undefined);
+  const [selectedCard, setSelectedCard] = React.useState(null);
 
   function handleAddPlaceClick() {
     setAddPlacePopupOpen(true);
@@ -32,7 +32,7 @@ function App() {
     setAddPlacePopupOpen(false);
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
-    setSelectedCard(undefined);
+    setSelectedCard(null);
   }
   return (
     <div className="page">
@@ -47,9 +47,9 @@ function App() {
         children={
           <>
             <input type="text" className="form__input" id="username" name="username" placeholder="Name" required minLength="2" maxLength="40" />
-            <span className="username-input-error form__error-text"></span>
+            <span className="username-input-error form__error-text"/>
             <input type="text" className="form__input" id="about" name="about" placeholder="About Me" required minLength="2" maxLength="200" />
-            <span className="about-input-error form__error-text "></span>
+            <span className="about-input-error form__error-text "/>
           </>
         }
         isOpen={isEditProfilePopupOpen}
@@ -63,9 +63,9 @@ function App() {
         children={
           <>
             <input type="text" className="form__input " id="title" name="name" placeholder="Title" minLength="1" maxLength="30" required />
-            <span className="title-input-error form__error-text "></span>
+            <span className="title-input-error form__error-text "/>
             <input type="URL" className="form__input" id="image-link" name="link" placeholder="Image link" required />
-            <span className="image-link-input-error form__error-text"></span>
+            <span className="image-link-input-error form__error-text"/>
           </>
         }
         isOpen={isAddPlacePopupOpen}
@@ -77,7 +77,7 @@ function App() {
         children={
           <>
             <input type="URL" className="form__input" id="avatar-link" name="avatar" placeholder="New Image URL" required />
-            <span className="avatar-link-input-error form__error-text"></span>
+            <span className="avatar-link-input-error form__error-text"/>
           </>
         }
         isOpen={isEditAvatarPopupOpen}
