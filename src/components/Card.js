@@ -1,11 +1,12 @@
 export default function Card({card, onCardClick,onDeleteCardClick}) {
+  
   function handleImageClick() {
     onCardClick(card);
   }
   function handleDeleteClick() {
-   //console.log("run");
     onDeleteCardClick();
   }
+
   return (
     <li className="card">
       <img

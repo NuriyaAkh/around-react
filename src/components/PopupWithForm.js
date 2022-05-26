@@ -1,4 +1,3 @@
-import React from 'react';
 export default function PopupWithForm({
   title,
   name,
@@ -17,7 +16,7 @@ export default function PopupWithForm({
           onClick={onClose}
         />
         <h3 className="forms__title">{title}</h3>
-        <form className="form" name={name} noValidate>
+        <form className="form" name={name}>
           {children}
           <button type="submit" className="form__button">
             {buttonText}
