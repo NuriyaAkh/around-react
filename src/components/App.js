@@ -5,6 +5,8 @@ import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import "../index.css";
+import {api} from '../utils/api';
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -12,6 +14,17 @@ function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
   const [isConfirmationPopupOpen, setConfirmationPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
+  const [currentUser,setCurrentUser] = useState({});
+
+  useEffect(() => {
+    api
+      .getUserData()
+      .then((data) => {
+        console.log(data);
+        setCurrentUser(data);
+        })
+      .catch((err) => console.error(`Error while loading profile info: ${err}`));
+  }, []);
 
   function handleAddPlaceClick() {
     setAddPlacePopupOpen(true);
@@ -36,6 +49,8 @@ function App() {
     setSelectedCard(null);
   }
   return (
+
+    <CurrentUserContext.Provider value ={currentUser}>
     <div className="page">
       <Header />
       <Main onEditProfileClick={handleEditProfileClick} onAddPlaceClick={handleAddPlaceClick} onEditAvatarClick={handleEditAvatarClick} onDeleteCardClick={handleDeleteClick} onCardClick={handleImageClick} />
@@ -86,7 +101,8 @@ function App() {
       />
       <PopupWithForm title="Are you sure?" name="confirm-form" buttonText="Yes" onClose={closeAllPopups} isOpen={isConfirmationPopupOpen} />
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-    </div>
+   </div>
+   </CurrentUserContext.Provider>
   );
 }
 

@@ -1,8 +1,9 @@
 import EditIcon from '../images/edit-avatar-logo.svg';
 import AddSign from '../images/+.svg';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState,useContext} from 'react';
 import {api} from '../utils/api';
 import Card from './Card';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 export default function Main({
   onEditProfileClick,
@@ -11,24 +12,14 @@ export default function Main({
   onCardClick,
   onDeleteCardClick,
 }) {
-  const [userData, setUserData] = useState({});
-  //const [userName, setUserName] = useState("");
-  // const [userDescription, setUserDescription] = useState("");
-  // const [userAvatar, setUserAvatar] = useState("");
+  const currentUser = useContext(CurrentUserContext);
+  // const [userData, setUserData] = useState({});
+  // //const [userName, setUserName] = useState("");
+  // // const [userDescription, setUserDescription] = useState("");
+  // // const [userAvatar, setUserAvatar] = useState("");
   const [cards, setCards] = useState([]);
 
-  useEffect(() => {
-    api
-      .getUserData()
-      .then((data) => {
-        //console.log(data);
-        setUserData(data);
-        //setUserName(data.name);
-        // setUserDescription(data.about);
-        // setUserAvatar(data.avatar);
-      })
-      .catch((err) => console.error(`Error while executing: ${err}`));
-  }, []);
+  
   useEffect(() => {
     api
       .getInitialCards()
@@ -45,7 +36,7 @@ export default function Main({
           <div className="profile__img-container">
             <img
               className="profile__img"
-              src={userData.avatar}
+              src={currentUser.avatar}
               alt="profile image"
             />
             <div className="profile__img-edit-logo">
@@ -59,14 +50,14 @@ export default function Main({
           </div>
           <div className="profile__info">
             <div className="profile__text">
-              <h1 className="profile__name">{userData.name}</h1>
+              <h1 className="profile__name">{currentUser.name}</h1>
               <button
                 aria-label="edit"
                 type="button"
                 className="profile__button-name-edit"
                 onClick={onEditProfileClick}
               />
-              <p className="profile__about">{userData.about}</p>
+              <p className="profile__about">{currentUser.about}</p>
             </div>
 
             <button

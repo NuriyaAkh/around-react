@@ -1,3 +1,6 @@
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import React, {useEffect, useState,useContext} from 'react';
+
 export default function Card({card, onCardClick,onDeleteCardClick}) {
   
   function handleImageClick() {
@@ -6,7 +9,19 @@ export default function Card({card, onCardClick,onDeleteCardClick}) {
   function handleDeleteClick() {
     onDeleteCardClick();
   }
+ const currentUser = React.useContext(CurrentUserContext);
+// Checking if the current user is the owner of the current card
+const isOwn = card.owner._id === currentUser._id;
 
+// Creating a variable which you'll then set in `className` for the delete button
+const cardDeleteButtonClassName = (
+  `card__delete ${isOwn ? 'card__delete_visible' : 'card__delete_hidden'}`
+);
+// Check if the card was liked by the current user
+const isLiked = card.likes.some(user => user._id === currentUser._id);
+
+// Create a variable which you then set in `className` for the like button
+const cardLikeButtonClassName = (`card__button ${isLiked &&`card__button_active`}`);
   return (
     <li className="card">
       <img
@@ -17,7 +32,7 @@ export default function Card({card, onCardClick,onDeleteCardClick}) {
       />
       <button
         aria-label="delete button"
-        className="card__delete"
+        className={cardDeleteButtonClassName}
         type="button"
         onClick ={handleDeleteClick}
       />
@@ -27,7 +42,7 @@ export default function Card({card, onCardClick,onDeleteCardClick}) {
           <button
             aria-label="love it"
             type="button"
-            className="card__button"
+            className={cardLikeButtonClassName}
           />
           <p className="card__likes-counter">{card.likes.length}</p>
         </div>
