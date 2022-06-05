@@ -11,23 +11,33 @@ export default function Main({
   onEditAvatarClick,
   onCardClick,
   onDeleteCardClick,
+  onCardLike,
+  
 }) {
   const currentUser = useContext(CurrentUserContext);
-  // const [userData, setUserData] = useState({});
-  // //const [userName, setUserName] = useState("");
-  // // const [userDescription, setUserDescription] = useState("");
-  // // const [userAvatar, setUserAvatar] = useState("");
-  const [cards, setCards] = useState([]);
+   const [cards, setCards] = useState([]);
+ 
 
+//  function handleCardLike(card) {
+//   // Check one more time if this card was already liked
+//   const isLiked = card.likes.some(user => user._id === currentUser._id);
   
-  useEffect(() => {
-    api
-      .getInitialCards()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((err) => console.error(`Error while executing: ${err}`));
-  }, []);
+//   // Send a request to the API and getting the updated card data
+//   api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+//       setCards((state) => state.map((currentCard) => currentCard._id === card._id ? newCard : currentCard));
+//   })
+//   .catch((err) => console.error(`Error while executing: ${err}`));
+// }
+
+  // useEffect(() => {
+  //   api
+  //     .getInitialCards()
+  //     .then((data) => {
+  //       setCards(data);
+  //     })
+  //     .catch((err) => console.error(`Error while executing: ${err}`));
+  // }, []);
+
 
   return (
     <>
@@ -52,7 +62,7 @@ export default function Main({
             <div className="profile__text">
               <h1 className="profile__name">{currentUser.name}</h1>
               <button
-                aria-label="edit"
+                aria-label="edit profile"
                 type="button"
                 className="profile__button-name-edit"
                 onClick={onEditProfileClick}
@@ -80,6 +90,7 @@ export default function Main({
                   card={card}
                   onCardClick={onCardClick}
                   onDeleteCardClick={onDeleteCardClick}
+                  onCardLike={onCardLike}
                 />
               );
             })}
