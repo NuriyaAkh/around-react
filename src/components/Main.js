@@ -89,7 +89,7 @@ export default function Main({
                   key={card._id}
                   card={card}
                   onCardClick={onCardClick}
-                  onDeleteCardClick={onDeleteCardClick}
+                  onCardDelete={onDeleteCardClick}
                   onCardLike={onCardLike}
                 />
               );

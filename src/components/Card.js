@@ -5,7 +5,7 @@ export default function Card({
   card,
   onCardClick,
   onCardLike,
-  onDeleteCardClick,
+  onCardDelete,
 }) {
   const currentUser = React.useContext(CurrentUserContext);
   // Checking if the current user is the owner of the current card
@@ -26,7 +26,7 @@ export default function Card({
     onCardClick(card);
   }
   function handleDeleteClick() {
-    onDeleteCardClick(card);
+    onCardDelete(card);
   }
   function handleLikeClick() {
     onCardLike(card);

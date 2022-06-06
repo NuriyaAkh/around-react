@@ -87,6 +87,7 @@ function App() {
       onEditProfileClick={handleEditProfileClick} onAddPlaceClick={handleAddPlaceClick} 
       onEditAvatarClick={handleEditAvatarClick} 
       //onDeleteCardClick={handleCardDelete} 
+      onCardDelete={handleCardDelete}
       onDeleteCardClick={handleDeleteClick} 
       onCardClick={handleImageClick} 
       onCardLike={handleCardLike}
