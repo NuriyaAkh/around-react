@@ -23,14 +23,14 @@ class Api  {
       this._checkResponse
     );
   }
-  editProfileInfo({ username, about }) {
+  editProfileInfo(userUpdate) {
     //PATCH https://around.nomoreparties.co/v1/groupId/users/me
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        name: username,
-        about: about,
+        name: userUpdate.username,
+        about: userUpdate.about,
       }),
     }).then(this._checkResponse);
   }

@@ -7,6 +7,7 @@ import ImagePopup from "./ImagePopup";
 import "../index.css";
 import {api} from '../utils/api';
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import EditProfilePopup from './EditProfilePopup';
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -70,7 +71,14 @@ function App() {
      })
      .catch((err) => console.error(`Error while executing: ${err}`));
    }
- 
+ function handleUpdateUser(userUpdate){
+   api.editProfileInfo(userUpdate)
+   .then((res)=>{
+     setCurrentUser(res);
+     closeAllPopups();
+   })
+   .catch((err) => console.error(`Error while executing: ${err}`));
+ }
   function closeAllPopups() {
     setAddPlacePopupOpen(false);
     setEditAvatarPopupOpen(false);
@@ -94,19 +102,9 @@ function App() {
       
       <Footer />
 
-      <PopupWithForm
-        title="Edit Profile"
-        name="edit-form"
-        formId="edit-profile"
-        children={
-          <>
-            <input type="text" className="form__input" id="username" name="username" placeholder="Name" required minLength="2" maxLength="40" />
-            <span className="username-input-error form__error-text"/>
-            <input type="text" className="form__input" id="about" name="about" placeholder="About Me" required minLength="2" maxLength="200" />
-            <span className="about-input-error form__error-text "/>
-          </>
-        }
+      <EditProfilePopup
         isOpen={isEditProfilePopupOpen}
+        onUpdate={handleUpdateUser}
         onClose={closeAllPopups}
       />
       <PopupWithForm
