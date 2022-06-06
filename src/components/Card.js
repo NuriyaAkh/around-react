@@ -23,7 +23,7 @@ function handleImageClick() {
 function handleDeleteClick() {
   onDeleteCardClick(card);
 }
-function handleCardLike(){
+function handleLikeClick(){
   onCardLike(card);
 }
 // function handleCardLike(card) {
@@ -58,7 +58,7 @@ function handleCardLike(){
             aria-label="like image"
             type="button"
             className={cardLikeButtonClassName}
-            onClick={handleCardLike}
+            onClick={handleLikeClick}
           />
           <p className="card__likes-counter">{card.likes.length}</p>
         </div>

@@ -63,6 +63,14 @@ function App() {
   })
   .catch((err) => console.error(`Error while executing: ${err}`));
  }
+ function handleCardDelete(card){
+   api.deleteCard(card._id)
+     .then((res)=>{
+       setCards(cards.filter((deletedCard)=> deletedCard._id !== card._id));
+     })
+     .catch((err) => console.error(`Error while executing: ${err}`));
+   }
+ 
   function closeAllPopups() {
     setAddPlacePopupOpen(false);
     setEditAvatarPopupOpen(false);
@@ -82,7 +90,6 @@ function App() {
       onCardLike={handleCardLike}
       cards={cards}  />
       
-      {/* ? */}
       <Footer />
 
       <PopupWithForm
