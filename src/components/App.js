@@ -79,8 +79,9 @@ function App() {
       onEditProfileClick={handleEditProfileClick} onAddPlaceClick={handleAddPlaceClick} 
       onEditAvatarClick={handleEditAvatarClick} onDeleteCardClick={handleDeleteClick} 
       onCardClick={handleImageClick} 
-      onCardLike={handleCardLike} />
-      cards={cards} 
+      onCardLike={handleCardLike}
+      cards={cards}  />
+      
       {/* ? */}
       <Footer />
 
