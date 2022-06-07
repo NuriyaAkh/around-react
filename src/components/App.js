@@ -93,9 +93,14 @@ function App() {
  function handleAddPlaceCard(newCard){
    api.
    addNewCard(newCard)
-   .then((res)=>{
-     setAddPlacePopupOpen(res);
+   .then((newCard)=>{
+     console.log("ttt");
+     setCards([newCard, ...cards]);
+     //setAddPlacePopupOpen(res);
+     
      closeAllPopups();
+     
+
    })
    .catch((err) => console.error(`Error while adding new card: ${err}`));
  }
@@ -140,7 +145,12 @@ function App() {
       onUpdate={handleAddPlaceCard}
      />
      
-      <PopupWithForm title="Are you sure?" name="confirm-form" buttonText="Yes" onClose={closeAllPopups} isOpen={isConfirmationPopupOpen} />
+      <PopupWithForm 
+      title="Are you sure?" 
+      name="confirm-form" 
+      buttonText="Yes" 
+      onClose={closeAllPopups} 
+      isOpen={isConfirmationPopupOpen} />
       
    </div>
    </CurrentUserContext.Provider>

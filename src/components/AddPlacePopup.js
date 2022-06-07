@@ -3,18 +3,22 @@ import { useEffect, useState, useRef } from "react";
 export default function AddPlacePopup({ isOpen,onUpdate, onClose}){
   
   const [cardTitle, setCardTitle]= useState("");
-  const imageLinkRef = useRef;
+  const [imageLink, setImageLink] = useState("");
   function handleFormSubmit(evt){
+    console.log("run");
     evt.preventDefault();
     onUpdate({
       name: cardTitle,
-      link: imageLinkRef.current.value
+      link: imageLink
+      
     })
   }
   function handleCardTitleChange(e){
     setCardTitle(e.target.value);
   }
- 
+ function handleImageLinkChange(e){
+   setImageLink(e.target.value);
+ }
 return(
   <PopupWithForm
   title="New place"
@@ -45,8 +49,10 @@ return(
       name="link" 
       placeholder="Image link" 
       required
-      //onChange={handleImageLinkChange} 
-      ref={imageLinkRef}/>
+      onChange={handleImageLinkChange} 
+      value={imageLink ||""}
+      //ref={imageLinkRef}
+      />
       <span className="image-link-input-error form__error-text"/>
     </>
   }
