@@ -9,6 +9,7 @@ import {api} from '../utils/api';
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from './AddPlacePopup';
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -89,6 +90,15 @@ function App() {
    })
    .catch((err) => console.error(`Error while executing: ${err}`));
  }
+ function handleAddPlaceCard(newCard){
+   api.
+   addNewCard(newCard)
+   .then((res)=>{
+     setAddPlacePopupOpen(res);
+     closeAllPopups();
+   })
+   .catch((err) => console.error(`Error while adding new card: ${err}`));
+ }
   function closeAllPopups() {
     setAddPlacePopupOpen(false);
     setEditAvatarPopupOpen(false);
@@ -119,27 +129,16 @@ function App() {
         onUpdate={handleUpdateUser}
         onClose={closeAllPopups}
       />
-       <EditAvatarPopup
-      isOpen={isEditAvatarPopupOpen}
-      onUpdate={handleUpdateAvatar}
-      onClose={closeAllPopups}
-      />
-      <PopupWithForm
-        title="New place"
-        name="add-form"
-        formId="img-add"
-        buttonText="Create"
-        children={
-          <>
-            <input type="text" className="form__input " id="title" name="name" placeholder="Title" minLength="1" maxLength="30" required />
-            <span className="title-input-error form__error-text "/>
-            <input type="URL" className="form__input" id="image-link" name="link" placeholder="Image link" required />
-            <span className="image-link-input-error form__error-text"/>
-          </>
-        }
-        isOpen={isAddPlacePopupOpen}
+      <EditAvatarPopup
+        isOpen={isEditAvatarPopupOpen}
+        onUpdate={handleUpdateAvatar}
         onClose={closeAllPopups}
       />
+     <AddPlacePopup
+      isOpen ={isAddPlacePopupOpen}
+      onClose={closeAllPopups}
+      onUpdate={handleAddPlaceCard}
+     />
      
       <PopupWithForm title="Are you sure?" name="confirm-form" buttonText="Yes" onClose={closeAllPopups} isOpen={isConfirmationPopupOpen} />
       
