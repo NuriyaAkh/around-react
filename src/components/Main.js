@@ -1,7 +1,6 @@
 import EditIcon from '../images/edit-avatar-logo.svg';
 import AddSign from '../images/+.svg';
-import React, {useEffect, useState,useContext} from 'react';
-import {api} from '../utils/api';
+import React, {useContext} from 'react';
 import Card from './Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
@@ -15,30 +14,7 @@ export default function Main({
   cards
 }) {
   const currentUser = useContext(CurrentUserContext);
-   //const [cards, setCards] = useState([]);
- 
-
-//  function handleCardLike(card) {
-//   // Check one more time if this card was already liked
-//   const isLiked = card.likes.some(user => user._id === currentUser._id);
-  
-//   // Send a request to the API and getting the updated card data
-//   api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-//       setCards((state) => state.map((currentCard) => currentCard._id === card._id ? newCard : currentCard));
-//   })
-//   .catch((err) => console.error(`Error while executing: ${err}`));
-// }
-
-  // useEffect(() => {
-  //   api
-  //     .getInitialCards()
-  //     .then((data) => {
-  //       setCards(data);
-  //     })
-  //     .catch((err) => console.error(`Error while executing: ${err}`));
-  // }, []);
-
-
+   
   return (
     <>
       <main className="content">
