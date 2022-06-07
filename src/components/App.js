@@ -8,6 +8,7 @@ import "../index.css";
 import {api} from '../utils/api';
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from "./EditAvatarPopup";
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -79,6 +80,15 @@ function App() {
    })
    .catch((err) => console.error(`Error while executing: ${err}`));
  }
+ function handleUpdateAvatar(avatarUpdate){
+   api.
+   editProfilePicture(avatarUpdate)
+   .then((res) =>{
+     setEditAvatarPopupOpen(res);
+     closeAllPopups();
+   })
+   .catch((err) => console.error(`Error while executing: ${err}`));
+ }
   function closeAllPopups() {
     setAddPlacePopupOpen(false);
     setEditAvatarPopupOpen(false);
@@ -123,17 +133,10 @@ function App() {
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
       />
-      <PopupWithForm
-        title="Change profile picture"
-        name="avatar-form"
-        children={
-          <>
-            <input type="URL" className="form__input" id="avatar-link" name="avatar" placeholder="New Image URL" required />
-            <span className="avatar-link-input-error form__error-text"/>
-          </>
-        }
-        isOpen={isEditAvatarPopupOpen}
-        onClose={closeAllPopups}
+      <EditAvatarPopup
+      isOpen={isEditAvatarPopupOpen}
+      onUpdate={handleUpdateAvatar}
+      onClose={closeAllPopups}
       />
       <PopupWithForm title="Are you sure?" name="confirm-form" buttonText="Yes" onClose={closeAllPopups} isOpen={isConfirmationPopupOpen} />
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
