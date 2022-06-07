@@ -112,10 +112,17 @@ function App() {
       
       <Footer />
 
+      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+
       <EditProfilePopup
         isOpen={isEditProfilePopupOpen}
         onUpdate={handleUpdateUser}
         onClose={closeAllPopups}
+      />
+       <EditAvatarPopup
+      isOpen={isEditAvatarPopupOpen}
+      onUpdate={handleUpdateAvatar}
+      onClose={closeAllPopups}
       />
       <PopupWithForm
         title="New place"
@@ -133,13 +140,9 @@ function App() {
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
       />
-      <EditAvatarPopup
-      isOpen={isEditAvatarPopupOpen}
-      onUpdate={handleUpdateAvatar}
-      onClose={closeAllPopups}
-      />
+     
       <PopupWithForm title="Are you sure?" name="confirm-form" buttonText="Yes" onClose={closeAllPopups} isOpen={isConfirmationPopupOpen} />
-      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+      
    </div>
    </CurrentUserContext.Provider>
   );

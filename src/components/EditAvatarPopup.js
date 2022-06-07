@@ -1,22 +1,23 @@
 import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import { useEffect, useState,useContext } from "react";
-export default function EditAvatarPopup({isOpen,onUpdate, onClose}){
+import { useEffect, useState,useContext, useRef } from "react";
+export default function EditAvatarPopup({isOpen, onUpdate,onClose}){
   const [avatar,setAvatar]= useState("");
   const currentUser = useContext(CurrentUserContext);
-  
-  useEffect(()=>{
-    if(currentUser){
-      setAvatar(currentUser.avatar);
-    }
-  }, [currentUser]);
-  function handleAvatarChange(e){
-    setAvatar(e.target.value);
-  }
+  const avatarRef= useRef();
+
+  // useEffect(()=>{
+  //   if(currentUser){
+  //     setAvatar(currentUser.avatar);
+  //   }
+  // }, [currentUser]);
+  // function handleAvatarChange(e){
+  //   setAvatar(e.target.value);
+  // }
   function handleFormSubmit(evt){
     evt.preventDefault();
     onUpdate({
-      avatar
+      avatar: avatarRef.current.value
     });
   }
   return(
@@ -34,7 +35,8 @@ export default function EditAvatarPopup({isOpen,onUpdate, onClose}){
             name="avatar" 
             placeholder="New Image URL" 
             required 
-            onChange={handleAvatarChange}
+            //onChange={handleAvatarChange}
+            ref= {avatarRef}
             />
             <span className="avatar-link-input-error form__error-text"/>
           </>
