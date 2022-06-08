@@ -58,7 +58,7 @@ function App() {
     console.log("delete click");
     console.log(card._id);
     setConfirmationPopupOpen(true);
-    setToDeleteCard(card._id);
+    setToDeleteCard(card);
     
   }
  function handleCardLike(card){
@@ -73,9 +73,8 @@ function App() {
   .catch((err) => console.error(`Error while executing: ${err}`));
  }
  function handleCardDelete(card){
-  console.log("delete press yes");
-  console.log(card);
-   api.deleteCard(card)
+  console.log("card deleted");
+    api.deleteCard(card._id)
    
      .then(()=>{
        setCards(cards.filter((deletedCard)=> deletedCard._id !== card._id));
