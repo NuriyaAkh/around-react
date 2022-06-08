@@ -26,7 +26,7 @@ function App() {
     api
       .getUserData()
       .then((data) => {
-        console.log(data);
+       // console.log(data);
         setCurrentUser(data);
         })
       .catch((err) => console.error(`Error while loading profile info: ${err}`));

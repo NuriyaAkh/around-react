@@ -5,7 +5,7 @@ export default function AddPlacePopup({ isOpen,onUpdate, onClose}){
   const [cardTitle, setCardTitle]= useState("");
   const [imageLink, setImageLink] = useState("");
   function handleFormSubmit(evt){
-    console.log("run");
+    console.log("card added");
     evt.preventDefault();
     onUpdate({
       name: cardTitle,
