@@ -1,13 +1,13 @@
 import PopupWithForm from "./PopupWithForm";
-import {api} from '../utils/api';
 import { useState } from "react";
-export default function ConfirmationPopup({isOpen, onUpdate,onClose}){
-const [deleteCard, setDeleteCard]=useState(null);
+
+export default function ConfirmationPopup({isOpen,onUpdate, onClose, card}){
+
   function handleCardDeleteSubmit(evt){
     evt.preventDefault(); 
-    console.log("delete1");
-    onUpdate({deleteCard})
-    setDeleteCard(null);
+    console.log("yes to delete");
+    onUpdate(card);
+    
   }
 
 return (

@@ -20,6 +20,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser,setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
+  const [toDeleteCard, setToDeleteCard]=useState(null);
  //get user data
   useEffect(() => {
     api
@@ -53,8 +54,12 @@ function App() {
   function handleImageClick(card) {
     setSelectedCard(card);
   }
-  function handleDeleteClick() {
+  function handleDeleteClick(card) {
+    console.log("delete click");
+    console.log(card._id);
     setConfirmationPopupOpen(true);
+    setToDeleteCard(card._id);
+    
   }
  function handleCardLike(card){
     //Check one more time if this card was already liked
@@ -68,9 +73,9 @@ function App() {
   .catch((err) => console.error(`Error while executing: ${err}`));
  }
  function handleCardDelete(card){
-  console.log("delete");
+  console.log("delete press yes");
   console.log(card);
-   api.deleteCard(card._id)
+   api.deleteCard(card)
    
      .then(()=>{
        setCards(cards.filter((deletedCard)=> deletedCard._id !== card._id));
@@ -120,7 +125,6 @@ function App() {
       onAddPlaceClick={handleAddPlaceClick} 
       onEditAvatarClick={handleEditAvatarClick} 
       onCardDelete={handleDeleteClick}
-      //onDeleteCardClick={handleDeleteClick} 
       onCardClick={handleImageClick} 
       onCardLike={handleCardLike}
       cards={cards}  />
@@ -149,6 +153,7 @@ function App() {
         isOpen={isConfirmationPopupOpen}
         onUpdate ={handleCardDelete}
         onClose={closeAllPopups} 
+        card={toDeleteCard}
       />
     </div>
    </CurrentUserContext.Provider>
