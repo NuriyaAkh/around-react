@@ -10,6 +10,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from './AddPlacePopup';
+import ConfirmationPopup from "./ConfirmationPopup";
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -67,11 +68,15 @@ function App() {
   .catch((err) => console.error(`Error while executing: ${err}`));
  }
  function handleCardDelete(card){
+  console.log("delete");
+  console.log(card);
    api.deleteCard(card._id)
-     .then((res)=>{
+   
+     .then(()=>{
        setCards(cards.filter((deletedCard)=> deletedCard._id !== card._id));
+       closeAllPopups();
      })
-     .catch((err) => console.error(`Error while executing: ${err}`));
+     .catch((err) => console.error(`Error while deleting: ${err}`));
    }
  function handleUpdateUser(userUpdate){
    api.editProfileInfo(userUpdate)
@@ -85,7 +90,7 @@ function App() {
    api.
    editProfilePicture(avatarUpdate)
    .then((res) =>{
-     setEditAvatarPopupOpen(res);
+     setCurrentUser(res);
      closeAllPopups();
    })
    .catch((err) => console.error(`Error while executing: ${err}`));
@@ -94,13 +99,8 @@ function App() {
    api.
    addNewCard(newCard)
    .then((newCard)=>{
-     console.log("ttt");
      setCards([newCard, ...cards]);
-     //setAddPlacePopupOpen(res);
-     
      closeAllPopups();
-     
-
    })
    .catch((err) => console.error(`Error while adding new card: ${err}`));
  }
@@ -112,23 +112,24 @@ function App() {
     setSelectedCard(null);
   }
   return (
-
-    <CurrentUserContext.Provider value ={currentUser}>
+   <CurrentUserContext.Provider value ={currentUser}>
     <div className="page">
       <Header />
       <Main 
-      onEditProfileClick={handleEditProfileClick} onAddPlaceClick={handleAddPlaceClick} 
+      onEditProfileClick={handleEditProfileClick} 
+      onAddPlaceClick={handleAddPlaceClick} 
       onEditAvatarClick={handleEditAvatarClick} 
-      onCardDelete={handleCardDelete}
+      onCardDelete={handleDeleteClick}
       //onDeleteCardClick={handleDeleteClick} 
       onCardClick={handleImageClick} 
       onCardLike={handleCardLike}
       cards={cards}  />
-      
       <Footer />
 
-      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-
+      <ImagePopup 
+      card={selectedCard} 
+      onClose={closeAllPopups} 
+      />
       <EditProfilePopup
         isOpen={isEditProfilePopupOpen}
         onUpdate={handleUpdateUser}
@@ -139,20 +140,17 @@ function App() {
         onUpdate={handleUpdateAvatar}
         onClose={closeAllPopups}
       />
-     <AddPlacePopup
-      isOpen ={isAddPlacePopupOpen}
-      onClose={closeAllPopups}
-      onUpdate={handleAddPlaceCard}
-     />
-     
-      <PopupWithForm 
-      title="Are you sure?" 
-      name="confirm-form" 
-      buttonText="Yes" 
-      onClose={closeAllPopups} 
-      isOpen={isConfirmationPopupOpen} />
-      
-   </div>
+      <AddPlacePopup
+        isOpen ={isAddPlacePopupOpen}
+        onUpdate={handleAddPlaceCard}
+        onClose={closeAllPopups}
+      />
+      <ConfirmationPopup
+        isOpen={isConfirmationPopupOpen}
+        onUpdate ={handleCardDelete}
+        onClose={closeAllPopups} 
+      />
+    </div>
    </CurrentUserContext.Provider>
   );
 }
