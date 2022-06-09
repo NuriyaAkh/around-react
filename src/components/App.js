@@ -21,6 +21,7 @@ function App() {
   const [currentUser,setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [toDeleteCard, setToDeleteCard]=useState(null);
+  const [isLoading, setIsLoading] = React.useState(false);
  //get user data
   useEffect(() => {
     api
@@ -74,6 +75,7 @@ function App() {
  }
  function handleCardDelete(card){
   console.log("card deleted");
+  setIsLoading(true);
     api.deleteCard(card._id)
    
      .then(()=>{
@@ -81,33 +83,47 @@ function App() {
        closeAllPopups();
      })
      .catch((err) => console.error(`Error while deleting: ${err}`))
-     .finally()
+     .finally(() => {
+      setIsLoading(false);
+    })
    }
  function handleUpdateUser(userUpdate){
+  setIsLoading(true);
    api.editProfileInfo(userUpdate)
    .then((res)=>{
      setCurrentUser(res);
      closeAllPopups();
    })
-   .catch((err) => console.error(`Error while executing: ${err}`));
+   .catch((err) => console.error(`Error while executing: ${err}`))
+   .finally(() => {
+    setIsLoading(false);
+  })
  }
  function handleUpdateAvatar(avatarUpdate){
+  setIsLoading(true);
    api.
    editProfilePicture(avatarUpdate)
    .then((res) =>{
      setCurrentUser(res);
      closeAllPopups();
    })
-   .catch((err) => console.error(`Error while executing: ${err}`));
+   .catch((err) => console.error(`Error while executing: ${err}`))
+   .finally(() => {
+    setIsLoading(false);
+  })
  }
  function handleAddPlaceCard(newCard){
+  setIsLoading(true);
    api.
    addNewCard(newCard)
    .then((newCard)=>{
      setCards([newCard, ...cards]);
      closeAllPopups();
    })
-   .catch((err) => console.error(`Error while adding new card: ${err}`));
+   .catch((err) => console.error(`Error while adding new card: ${err}`))
+   .finally(() => {
+    setIsLoading(false);
+  });
  }
   function closeAllPopups() {
     setAddPlacePopupOpen(false);
@@ -138,22 +154,26 @@ function App() {
         isOpen={isEditProfilePopupOpen}
         onUpdate={handleUpdateUser}
         onClose={closeAllPopups}
+        buttonText={isLoading ? "Saving..." : "Save"}
       />
       <EditAvatarPopup
         isOpen={isEditAvatarPopupOpen}
         onUpdate={handleUpdateAvatar}
         onClose={closeAllPopups}
+        buttonText={isLoading ? "Saving..." : "Save"}
       />
       <AddPlacePopup
         isOpen ={isAddPlacePopupOpen}
         onUpdate={handleAddPlaceCard}
         onClose={closeAllPopups}
+        buttonText={isLoading ? "Creating..." : "Create"}
       />
       <ConfirmationPopup
         isOpen={isConfirmationPopupOpen}
         onUpdate ={handleCardDelete}
         onClose={closeAllPopups} 
         card={toDeleteCard}
+        buttonText={isLoading ? "Deleting..." : "Yes"}
       />
     </div>
    </CurrentUserContext.Provider>
