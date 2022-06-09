@@ -2,7 +2,7 @@ import EditIcon from '../images/edit-avatar-logo.svg';
 import AddSign from '../images/+.svg';
 import React, {useContext} from 'react';
 import Card from './Card';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
 export default function Main({
   onEditProfileClick,
@@ -11,10 +11,10 @@ export default function Main({
   onCardClick,
   onCardDelete,
   onCardLike,
-  cards
+  cards,
 }) {
   const currentUser = useContext(CurrentUserContext);
-   
+
   return (
     <>
       <main className="content">

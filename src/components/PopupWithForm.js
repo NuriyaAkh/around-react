@@ -3,7 +3,7 @@ export default function PopupWithForm({
   name,
   isOpen,
   onSubmit,
-  buttonText = 'Save',
+  buttonText,
   onClose,
   children,
 }) {

@@ -1,6 +1,6 @@
 import PopupWithForm from "./PopupWithForm";
 
-export default function ConfirmationPopup({isOpen,onUpdate, onClose, card}){
+export default function ConfirmationPopup({isOpen,onUpdate, onClose, card, buttonText}){
 
   function handleCardDeleteSubmit(evt){
     evt.preventDefault(); 
@@ -12,7 +12,7 @@ return (
 <PopupWithForm 
 title="Are you sure?" 
 name="confirm-form" 
-buttonText="Yes" 
+buttonText={buttonText}
 onClose={onClose} 
 isOpen={isOpen}
 onSubmit ={handleCardDeleteSubmit} />

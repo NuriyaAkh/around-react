@@ -1,7 +1,7 @@
 import PopupWithForm from "./PopupWithForm";
 // import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import {useRef } from "react";
-export default function EditAvatarPopup({isOpen, onUpdate,onClose}){
+export default function EditAvatarPopup({isOpen, onUpdate,onClose, buttonText}){
   
   const avatarRef= useRef();
 
@@ -18,6 +18,7 @@ export default function EditAvatarPopup({isOpen, onUpdate,onClose}){
         onSubmit={handleFormSubmit}
         isOpen={isOpen}
         onClose={onClose}
+        buttonText={buttonText}
         children={
           <>
             <input 
