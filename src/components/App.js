@@ -80,7 +80,8 @@ function App() {
        setCards(cards.filter((deletedCard)=> deletedCard._id !== card._id));
        closeAllPopups();
      })
-     .catch((err) => console.error(`Error while deleting: ${err}`));
+     .catch((err) => console.error(`Error while deleting: ${err}`))
+     .finally()
    }
  function handleUpdateUser(userUpdate){
    api.editProfileInfo(userUpdate)
