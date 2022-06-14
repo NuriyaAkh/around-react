@@ -17,15 +17,14 @@ export default function PopupWithForm({
           onClick={onClose}
         />
         <h3 className="forms__title">{title}</h3>
-        <form 
-        className="form" 
-        name={name} 
-        onSubmit={onSubmit}>
+        <form className="form" name={name} onSubmit={onSubmit}>
           {children}
-          <button 
-          type="submit" 
-          className="form__button"
-          noValidate>
+          <button
+            type="submit"
+            className="form__button"
+            //disabled= {}
+            noValidate
+          >
             {buttonText}
           </button>
         </form>

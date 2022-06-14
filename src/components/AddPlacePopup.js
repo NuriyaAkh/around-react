@@ -1,10 +1,17 @@
 import PopupWithForm from './PopupWithForm';
-import {useEffect, useState, useRef} from 'react';
+import { useState} from 'react';
 export default function AddPlacePopup({isOpen, onUpdate, onClose, buttonText}) {
   const [cardTitle, setCardTitle] = useState('');
   const [imageLink, setImageLink] = useState('');
+  const [isCardTitleValid, setIsCardTitleValid] = useState(true);
+  const [isImageLinkValid, setIsImageLinkValid] = useState(true);
+  const [errorMessage, setErrorMessage] = useState({
+    cardTitle: ' ',
+    imageLink: ' ',
+  });
+
   function handleFormSubmit(evt) {
-    console.log('card added');
+    //console.log('card added');
     evt.preventDefault();
     onUpdate({
       name: cardTitle,
@@ -13,9 +20,13 @@ export default function AddPlacePopup({isOpen, onUpdate, onClose, buttonText}) {
   }
   function handleCardTitleChange(e) {
     setCardTitle(e.target.value);
+    setIsCardTitleValid(e.target.validity.valid);
+    setErrorMessage({cardTitle: e.target.validationMessage});
   }
   function handleImageLinkChange(e) {
     setImageLink(e.target.value);
+    setIsImageLinkValid(e.target.validity.valid);
+    setErrorMessage({imageLink: e.target.validationMessage});
   }
   return (
     <PopupWithForm
@@ -26,11 +37,14 @@ export default function AddPlacePopup({isOpen, onUpdate, onClose, buttonText}) {
       onSubmit={handleFormSubmit}
       isOpen={isOpen}
       onClose={onClose}
+      activeButton={isCardTitleValid && isImageLinkValid}
       children={
         <>
           <input
             type="text"
-            className="form__input "
+            className={`form__input ${
+              isCardTitleValid ? '' : 'form__input_type_error'
+            }`}
             id="title"
             name="name"
             placeholder="Title"
@@ -40,19 +54,32 @@ export default function AddPlacePopup({isOpen, onUpdate, onClose, buttonText}) {
             onChange={handleCardTitleChange}
             value={cardTitle || ''}
           />
-          <span className="title-input-error form__error-text " />
+          <span
+            className={`title-input-error ${
+              isCardTitleValid ? '' : 'form__error-text_active'
+            }`}
+          >
+            {errorMessage.cardTitle}
+          </span>
           <input
             type="URL"
-            className="form__input"
+            className={`form__input ${
+              isImageLinkValid ? '' : 'form__input_type_error'
+            }`}
             id="image-link"
             name="link"
             placeholder="Image link"
             required
             onChange={handleImageLinkChange}
             value={imageLink || ''}
-            //ref={imageLinkRef}
           />
-          <span className="image-link-input-error form__error-text" />
+          <span
+            className={`image-link-input-error ${
+              isImageLinkValid ? '' : 'form__error-text_active'
+            }`}
+          >
+            {errorMessage.imageLink}
+          </span>
         </>
       }
     />

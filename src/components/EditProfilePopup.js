@@ -1,6 +1,7 @@
 import PopupWithForm from './PopupWithForm';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 import {useEffect, useState, useContext} from 'react';
+
 export default function EditProfilePopup({
   isOpen,
   onUpdate,
@@ -10,8 +11,18 @@ export default function EditProfilePopup({
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const currentUser = useContext(CurrentUserContext);
+  const [isNameValid, setIsNameValid] = useState(true);
+  const [isDescriptionValid, setIsDescriptionValid] = useState(true);
+  const [errorMessage, setErrorMessage] = useState({
+    name: ' ',
+    description: ' ',
+  });
+
   useEffect(() => {
     if (currentUser) {
+      //Yuf
+      // setName(currentUser.name ?? "");
+      // setDescription(currentUser.about ?? "");
       setName(currentUser.name);
       setDescription(currentUser.about);
     }
@@ -19,9 +30,13 @@ export default function EditProfilePopup({
 
   function handleNameChange(e) {
     setName(e.target.value);
+    setIsNameValid(e.target.validity.valid);
+    setErrorMessage({name: e.target.validationMessage});
   }
   function handleDescriptionChange(e) {
     setDescription(e.target.value);
+    setIsDescriptionValid(e.target.validity.valid);
+    setErrorMessage({description: e.target.validationMessage});
   }
   function handleFormSubmit(evt) {
     evt.preventDefault();
@@ -40,11 +55,15 @@ export default function EditProfilePopup({
       isOpen={isOpen}
       onClose={onClose}
       buttonText={buttonText}
+      activeButton={isNameValid && isDescriptionValid}
+      disableButton={!isNameValid && isDescriptionValid}
       children={
         <>
           <input
             type="text"
-            className="form__input"
+            className={`form__input ${
+              isNameValid ? '' : 'form__input_type_error'
+            }`}
             id="username"
             name="username"
             placeholder="Name"
@@ -54,10 +73,17 @@ export default function EditProfilePopup({
             value={name || ''}
             onChange={handleNameChange}
           />
-          <span className="username-input-error form__error-text" />
+
+          <span
+            className={`username-input-error ${
+              isNameValid ? '' : 'form__error-text_active'
+            }`}
+          >
+            {errorMessage.name}
+          </span>
           <input
             type="text"
-            className="form__input"
+            className="form__input "
             id="about"
             name="about"
             placeholder="About Me"
@@ -67,7 +93,13 @@ export default function EditProfilePopup({
             value={description || ''}
             onChange={handleDescriptionChange}
           />
-          <span className="about-input-error form__error-text " />
+          <span
+            className={`about-input-error ${
+              isDescriptionValid ? '' : 'form__error-text_active'
+            }`}
+          >
+            {errorMessage.description}
+          </span>
         </>
       }
     />
