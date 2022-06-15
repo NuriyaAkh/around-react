@@ -162,6 +162,7 @@ function App() {
           onUpdate={handleUpdateUser}
           onClose={closeAllPopups}
           buttonText={isLoading ? 'Saving...' : 'Save'}
+          
         />
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}

@@ -20,12 +20,22 @@ export default function AddPlacePopup({isOpen, onUpdate, onClose, buttonText}) {
   }
   function handleCardTitleChange(e) {
     setCardTitle(e.target.value);
-    setIsCardTitleValid(e.target.validity.valid);
+    if (e.target.checkValidity()) {
+      setIsCardTitleValid(true);
+    } else {
+      setIsCardTitleValid(false);
+    }
+    //setIsCardTitleValid(e.target.validity.valid);
     setErrorMessage({cardTitle: e.target.validationMessage});
   }
   function handleImageLinkChange(e) {
     setImageLink(e.target.value);
-    setIsImageLinkValid(e.target.validity.valid);
+    if (e.target.checkValidity()) {
+      setIsImageLinkValid(true);
+    } else {
+      setIsImageLinkValid(false);
+    }
+   // setIsImageLinkValid(e.target.validity.valid);
     setErrorMessage({imageLink: e.target.validationMessage});
   }
   return (
@@ -37,7 +47,7 @@ export default function AddPlacePopup({isOpen, onUpdate, onClose, buttonText}) {
       onSubmit={handleFormSubmit}
       isOpen={isOpen}
       onClose={onClose}
-      activeButton={isCardTitleValid && isImageLinkValid}
+      activeButton= {isCardTitleValid && isImageLinkValid}
       children={
         <>
           <input

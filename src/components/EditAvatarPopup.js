@@ -12,7 +12,12 @@ export default function EditAvatarPopup({
   const [errorMessage, setErrorMessage] = useState({avatar: ' '});
 
   function handleAvatarChange(e) {
-    setIsNewAvatarUrlValid(e.target.validity.valid);
+    if (e.target.checkValidity()) {
+      setIsNewAvatarUrlValid(true);
+    } else {
+      setIsNewAvatarUrlValid(false);
+    }
+    //setIsNewAvatarUrlValid(e.target.validity.valid);
     setErrorMessage({avatar: e.target.validationMessage});
   }
   function handleFormSubmit(evt) {

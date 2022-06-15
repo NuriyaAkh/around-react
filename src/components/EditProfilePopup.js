@@ -7,6 +7,7 @@ export default function EditProfilePopup({
   onUpdate,
   onClose,
   buttonText,
+  buttonState,
 }) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -20,9 +21,6 @@ export default function EditProfilePopup({
 
   useEffect(() => {
     if (currentUser) {
-      //Yuf
-      // setName(currentUser.name ?? "");
-      // setDescription(currentUser.about ?? "");
       setName(currentUser.name);
       setDescription(currentUser.about);
     }
@@ -30,12 +28,22 @@ export default function EditProfilePopup({
 
   function handleNameChange(e) {
     setName(e.target.value);
-    setIsNameValid(e.target.validity.valid);
+    if (e.target.checkValidity()) {
+      setIsNameValid(true);
+    } else {
+      setIsNameValid(false);
+    }
+    //setIsNameValid(e.target.validity.valid);
     setErrorMessage({name: e.target.validationMessage});
   }
   function handleDescriptionChange(e) {
     setDescription(e.target.value);
-    setIsDescriptionValid(e.target.validity.valid);
+    if (e.target.checkValidity()) {
+      setIsDescriptionValid(true);
+    } else {
+      setIsDescriptionValid(false);
+    }
+    //setIsDescriptionValid(e.target.validity.valid);
     setErrorMessage({description: e.target.validationMessage});
   }
   function handleFormSubmit(evt) {
@@ -56,7 +64,6 @@ export default function EditProfilePopup({
       onClose={onClose}
       buttonText={buttonText}
       activeButton={isNameValid && isDescriptionValid}
-      disableButton={!isNameValid && isDescriptionValid}
       children={
         <>
           <input

@@ -1,3 +1,5 @@
+import React, {useRef, useState, useEffect} from 'react';
+
 export default function PopupWithForm({
   title,
   name,
@@ -7,6 +9,12 @@ export default function PopupWithForm({
   onClose,
   children,
 }) {
+  const [isFormValid, setFormValid] = useState(false);
+  const formRef = useRef();
+  useEffect(() => {
+    setFormValid(formRef.current.checkValidity());
+  }, [children]);
+
   return (
     <div className={`forms ${isOpen ? 'forms_is-open' : ''}`}>
       <div className="forms__container">
@@ -21,8 +29,10 @@ export default function PopupWithForm({
           {children}
           <button
             type="submit"
-            className="form__button"
-            //disabled= {}
+            className={`form__button ${
+              !isFormValid ? 'form__button_disabled' : ''
+            }`}
+            disabled={!isFormValid}
             noValidate
           >
             {buttonText}
