@@ -8,6 +8,7 @@ export default function PopupWithForm({
   buttonText,
   onClose,
   children,
+  //buttonState
 }) {
   const [isFormValid, setFormValid] = useState(false);
   const formRef = useRef();
@@ -25,18 +26,23 @@ export default function PopupWithForm({
           onClick={onClose}
         />
         <h3 className="forms__title">{title}</h3>
-        <form className="form" name={name} onSubmit={onSubmit}>
+        <form 
+          className="form" 
+          name={name} 
+          onSubmit={onSubmit}
+          ref={formRef}
+        >
           {children}
-          <button
+        <button
             type="submit"
             className={`form__button ${
               !isFormValid ? 'form__button_disabled' : ''
             }`}
             disabled={!isFormValid}
             noValidate
-          >
+        >
             {buttonText}
-          </button>
+        </button>
         </form>
       </div>
     </div>
