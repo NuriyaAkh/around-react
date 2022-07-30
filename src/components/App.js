@@ -27,7 +27,7 @@ function App() {
     api
       .getUserData()
       .then((data) => {
-        // console.log(data);
+       
         setCurrentUser(data);
       })
       .catch((err) =>
@@ -59,8 +59,7 @@ function App() {
     setSelectedCard(card);
   }
   function handleDeleteClick(card) {
-    console.log('delete click');
-    console.log(card._id);
+   
     setConfirmationPopupOpen(true);
     setToDeleteCard(card);
   }
@@ -81,7 +80,7 @@ function App() {
       .catch((err) => console.error(`Error while executing: ${err}`));
   }
   function handleCardDelete(card) {
-    console.log('card deleted');
+    
     setIsLoading(true);
     api
       .deleteCard(card._id)

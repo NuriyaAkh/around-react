@@ -8,7 +8,7 @@ export default function PopupWithForm({
   buttonText,
   onClose,
   children,
-  //buttonState
+  
 }) {
   const [isFormValid, setFormValid] = useState(false);
   const formRef = useRef();

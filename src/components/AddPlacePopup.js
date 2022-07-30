@@ -11,7 +11,7 @@ export default function AddPlacePopup({isOpen, onUpdate, onClose, buttonText}) {
   });
 
   function handleFormSubmit(evt) {
-    //console.log('card added');
+   
     evt.preventDefault();
     onUpdate({
       name: cardTitle,
